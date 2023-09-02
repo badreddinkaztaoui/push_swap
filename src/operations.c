@@ -6,11 +6,18 @@
 /*   By: bkaztaou <bkaztaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 01:45:45 by bkaztaou          #+#    #+#             */
-/*   Updated: 2023/08/27 15:48:14 by bkaztaou         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:12:38 by bkaztaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+
+int	peek(t_node *stack)
+{
+	while (stack && stack->next)
+		stack = stack->next;
+	return (stack->num);
+}
 
 void	shift(t_node **stack, int val)
 {

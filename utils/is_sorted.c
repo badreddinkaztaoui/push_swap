@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   is_sorted.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkaztaou <bkaztaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/16 06:49:53 by bkaztaou          #+#    #+#             */
-/*   Updated: 2023/09/01 01:52:29 by bkaztaou         ###   ########.fr       */
+/*   Created: 2023/09/01 02:04:20 by bkaztaou          #+#    #+#             */
+/*   Updated: 2023/09/01 02:09:10 by bkaztaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	main(int ac, char **av)
+int	is_sorted(t_node **stack)
 {
-	t_node	*stack_a;
-	t_node	*stack_b;
-	int		curr_num;
-	int		i;
+	t_node	*curr;
 
-	stack_a = NULL;
-	stack_b = NULL;
-	if (ac < 2)
-		exit(2);
-	i = 0;
-	while (++i < ac)
+	curr = *stack;
+	while (curr && curr->next)
 	{
-		curr_num = ft_atoi(av[i]);
-		if (ft_isdup_node(stack_a, curr_num))
-			ft_error();
-		shift(&stack_a, curr_num);
+		if (curr->num > curr->next->num)
+			return (0);
+		curr = curr->next;
 	}
-	print_list(stack_a);
-	algorithm(&stack_a, &stack_b);
-	print_list(stack_a);
-	deallocate(&stack_a);
-	return (0);
+	return (1);
 }

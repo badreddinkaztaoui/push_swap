@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   list_to_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkaztaou <bkaztaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/16 06:49:53 by bkaztaou          #+#    #+#             */
-/*   Updated: 2023/09/01 01:52:29 by bkaztaou         ###   ########.fr       */
+/*   Created: 2023/09/01 01:47:23 by bkaztaou          #+#    #+#             */
+/*   Updated: 2023/09/03 00:39:24 by bkaztaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	main(int ac, char **av)
+int	*list_to_array(t_node **stack_a, int dir)
 {
-	t_node	*stack_a;
-	t_node	*stack_b;
-	int		curr_num;
+	int		size;
+	int		*arr;
 	int		i;
+	t_node	*curr;
 
-	stack_a = NULL;
-	stack_b = NULL;
-	if (ac < 2)
-		exit(2);
-	i = 0;
-	while (++i < ac)
+	size = ft_listsize(*stack_a);
+	arr = (int *)malloc(sizeof(int) * size);
+	if (!arr)
+		ft_error();
+	curr = *stack_a;
+	i = -1;
+	while (++i < size)
 	{
-		curr_num = ft_atoi(av[i]);
-		if (ft_isdup_node(stack_a, curr_num))
-			ft_error();
-		shift(&stack_a, curr_num);
+		arr[i] = curr->num;
+		curr = curr->next;
 	}
-	print_list(stack_a);
-	algorithm(&stack_a, &stack_b);
-	print_list(stack_a);
-	deallocate(&stack_a);
-	return (0);
+	quick_sort(arr, 0, size - 1, dir);
+	return (arr);
 }
