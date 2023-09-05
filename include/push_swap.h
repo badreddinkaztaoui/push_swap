@@ -6,7 +6,7 @@
 /*   By: bkaztaou <bkaztaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 06:28:37 by bkaztaou          #+#    #+#             */
-/*   Updated: 2023/09/02 20:53:47 by bkaztaou         ###   ########.fr       */
+/*   Updated: 2023/09/05 00:46:21 by bkaztaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
-typedef struct s_vars
+typedef struct s_params
 {
-	int		total_size;
-	t_node	*stack_b_head;
-	int		current_index;
-	int		current_count;
-	int		segment_size;
-}	t_vars;
+	t_node	*b_head;
+	int		t_length;
+	int		p_length;
+	int		curr_index;
+	int		curr_count;
+}	t_params;
 
-typedef struct s_vars_to_a
+typedef struct s_bta
 {
-	int	i;
+	int	num;
 	int	counter;
 	int	index;
 	int	*arr;
-}	t_vars_to_a;
+}	t_bta;
 
 /* FUNCTIONS PROTOTYPE */
 
@@ -55,7 +55,7 @@ int		pop(t_node **stack);
 int		peek(t_node *stack);
 int		ft_max(t_node *stack);
 int		ft_min(t_node *stack);
-int		ft_getminidx(t_node *stack);
+int		ft_getidx(t_node *stack, int num);
 int		*list_to_array(t_node **stack_a, int dir);
 int		is_sorted(t_node **stack);
 void	quick_sort(int arr[], int low, int high, int dir);
@@ -79,7 +79,7 @@ void	rrr(t_node **stack_a, t_node **stack_b);
 void	sort_three_nums(t_node **stack_a);
 void	sort_five_nums(t_node **stack_a, t_node **stack_b);
 void	sort_ten_num(t_node **stack_a, t_node **stack_b);
-void	push_b_to_a(t_node **stack_a, t_node **stack_b);
+void	push_back_to_a(t_node **stack_a, t_node **stack_b);
 void	sort_mult_nums(t_node **stack_a, t_node **stack_b);
 void	algorithm(t_node **stack_a, t_node **stack_b);
 t_node	ft_lastnode(t_node **stack);

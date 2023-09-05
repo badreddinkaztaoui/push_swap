@@ -6,30 +6,13 @@
 /*   By: bkaztaou <bkaztaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 02:45:10 by bkaztaou          #+#    #+#             */
-/*   Updated: 2023/09/03 00:31:28 by bkaztaou         ###   ########.fr       */
+/*   Updated: 2023/09/05 01:39:36 by bkaztaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	find_max_index_in_b(t_node *stack_b)
-{
-	int	max_num;
-	int	index;
-
-	max_num = ft_max(stack_b);
-	index = 0;
-	while (stack_b)
-	{
-		if (stack_b->num == max_num)
-			return (index);
-		stack_b = stack_b->next;
-		index++;
-	}
-	return (-1);
-}
-
-void	put_max_b_in_top(t_node **stack_b)
+void	ft_move_to_top(t_node **stack_b)
 {
 	int		size;
 	int		index;
@@ -37,7 +20,7 @@ void	put_max_b_in_top(t_node **stack_b)
 
 	size = ft_listsize(*stack_b);
 	stack_tmp = *stack_b;
-	index = find_max_index_in_b(*stack_b);
+	index = ft_getidx(*stack_b, ft_max(*stack_b));
 	if (index < (size / 2))
 	{
 		while (index > 0)
@@ -56,32 +39,14 @@ void	put_max_b_in_top(t_node **stack_b)
 	}
 }
 
-void	push_to_a_helper(t_node **stack_a, t_node **stack_b, t_vars_to_a *var)
-{
-	if ((*stack_b)->num == var->arr[var->i])
-	{
-		pa(stack_a, stack_b);
-		var->i++;
-	}
-	else if (var->counter == 0
-		|| (*stack_b)->num > peek(*stack_a))
-	{
-		pa(stack_a, stack_b);
-		ra(stack_a);
-		var->counter++;
-	}
-	else
-		put_max_b_in_top(stack_b);
-}
-
-int	is_max_in_b(t_node *stack_b, int val_max)
+int	max_is_top(t_node *stack_b, int num)
 {
 	int	i;
 
 	i = 0;
 	while (stack_b)
 	{
-		if (stack_b->num == val_max)
+		if (stack_b->num == num)
 			return (i);
 		stack_b = stack_b->next;
 		i++;
@@ -89,29 +54,46 @@ int	is_max_in_b(t_node *stack_b, int val_max)
 	return (-1);
 }
 
-void	push_b_to_a(t_node **stack_a, t_node **stack_b)
+void	ft_check_pa(t_node **a, t_node **b, t_bta *params)
 {
-	t_vars_to_a	var;
-
-	var.i = 0;
-	var.counter = 0;
-	var.arr = list_to_array(stack_b, 1);
-	while (*stack_b)
+	if ((*b)->num == params->arr[params->index])
 	{
-		var.index = is_max_in_b(*stack_b, var.arr[var.i]);
-		if (var.index != -1)
-			push_to_a_helper(stack_a, stack_b, &var);
+		pa(a, b);
+		params->index++;
+	}
+	else if (params->counter == 0
+		|| (*b)->num > peek(*a))
+	{
+		pa(a, b);
+		ra(a);
+		params->counter++;
+	}
+	else
+		ft_move_to_top(b);
+}
+
+void	push_back_to_a(t_node **a, t_node **b)
+{
+	t_bta	params;
+
+	params.index = 0;
+	params.counter = 0;
+	params.arr = list_to_array(b, 1);
+	while (*b)
+	{
+		if (max_is_top(*b, params.arr[params.index]) != -1)
+			ft_check_pa(a, b, &params);
 		else
 		{
-			rra(stack_a);
-			var.counter--;
-			var.i++;
+			rra(a);
+			params.counter--;
+			params.index++;
 		}
 	}
-	free(var.arr);
-	while (var.counter > 0)
+	free(params.arr);
+	while (params.counter > 0)
 	{
-		rra(stack_a);
-		var.counter--;
+		rra(a);
+		params.counter--;
 	}
 }

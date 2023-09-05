@@ -6,27 +6,25 @@
 /*   By: bkaztaou <bkaztaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:40:55 by bkaztaou          #+#    #+#             */
-/*   Updated: 2023/08/27 16:46:32 by bkaztaou         ###   ########.fr       */
+/*   Updated: 2023/09/05 00:45:53 by bkaztaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	ft_getminidx(t_node *stack)
+int	ft_getidx(t_node *stack, int num)
 {
-	int		idx;
-	int		min;
+	int		index;
 	t_node	*curr;
 
-	idx = 0;
+	index = 0;
 	curr = stack;
-	min = ft_min(stack);
 	while (curr)
 	{
-		if (curr->num == min)
-			return (min);
+		if (curr->num == num)
+			return (index);
 		curr = curr->next;
-		min++;
+		index++;
 	}
 	return (-1);
 }

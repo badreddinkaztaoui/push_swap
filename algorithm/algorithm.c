@@ -6,7 +6,7 @@
 /*   By: bkaztaou <bkaztaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 17:39:45 by bkaztaou          #+#    #+#             */
-/*   Updated: 2023/09/03 00:10:25 by bkaztaou         ###   ########.fr       */
+/*   Updated: 2023/09/04 22:17:19 by bkaztaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ void	algorithm(t_node **stack_a, t_node **stack_b)
 	{
 		index_nodes(stack_a);
 		sort_mult_nums(stack_a, stack_b);
-		push_b_to_a(stack_a, stack_b);
 	}
 }
