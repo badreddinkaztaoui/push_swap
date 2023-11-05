@@ -53,7 +53,7 @@ The program is designed to sort a stack of numbers using a set of specific opera
 To compile and run the program, use the following commands:
 
 ```bash
-gcc -o push_swap main.c stack_operations.c sorting_algorithms.c utility_functions.c
+make
 ./push_swap <list_of_numbers>
 ```
 
